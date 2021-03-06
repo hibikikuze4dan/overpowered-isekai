@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { IsekaiPointsMatcher } from "../../matchers/IsekaiPoints";
 import { getLocationData } from "../../redux/selectors";
+import CardListComponent from "../card-list";
 import OpenerComponent from "../opener";
 
 const SectionComponent = () => {
@@ -16,6 +17,7 @@ const SectionComponent = () => {
           description={description}
           matchers={[new IsekaiPointsMatcher("IP")]}
         />
+        <CardListComponent />
       </Grid>
     </Grid>
   );

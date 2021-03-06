@@ -25,3 +25,5 @@ Some drawbacks have requirements
 Section for Nemesis for distribution of powers?
 
 Character gacha needs section for selecting random waifu/companions
+
+Section For Selecting power upgrade for Power of Love
