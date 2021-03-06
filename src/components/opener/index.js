@@ -2,7 +2,7 @@ import { Grid } from "@material-ui/core";
 import React from "react";
 import TextComponent from "../text";
 
-const OpenerComponent = ({ title, description }) => {
+const OpenerComponent = ({ title, description, matchers }) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12}>
@@ -15,6 +15,7 @@ const OpenerComponent = ({ title, description }) => {
               <TextComponent
                 key={`opener-description-${ind}`}
                 text={descriptionText}
+                matchers={matchers}
               />
               <br />
             </>
@@ -28,6 +29,7 @@ const OpenerComponent = ({ title, description }) => {
 OpenerComponent.defaultProps = {
   title: "hello",
   description: [""],
+  matchers: [],
 };
 
 export default OpenerComponent;

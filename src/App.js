@@ -1,11 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import { Counter } from "./features/counter/Counter";
+import "./App.css";
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
+import RoutesComponent from "./components/routes";
 
 function App() {
   return (
     <div className="App">
+      <HashRouter>
+        <Switch>
+          <RoutesComponent />
+        </Switch>
+        <Route exact path="/" render={() => <Redirect to="/opening" />} />
+      </HashRouter>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />

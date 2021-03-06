@@ -1,7 +1,7 @@
-import title from "./title";
+import opening from "./opening";
 
 const data = {
-  title,
+  opening,
 };
 
 export default data;
