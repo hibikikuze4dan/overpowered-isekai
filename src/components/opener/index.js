@@ -1,5 +1,5 @@
 import { Grid } from "@material-ui/core";
-import React from "react";
+import React, { Fragment } from "react";
 import TextComponent from "../text";
 
 const OpenerComponent = ({ title, description, matchers }) => {
@@ -11,14 +11,10 @@ const OpenerComponent = ({ title, description, matchers }) => {
       <Grid item xs={12}>
         {description.map((descriptionText, ind) => {
           return (
-            <>
-              <TextComponent
-                key={`opener-description-${ind}`}
-                text={descriptionText}
-                matchers={matchers}
-              />
+            <Fragment key={`opener-description-${ind}`}>
+              <TextComponent text={descriptionText} matchers={matchers} />
               <br />
-            </>
+            </Fragment>
           );
         })}
       </Grid>

@@ -8,7 +8,8 @@ import {
 import { snakeCase } from "lodash";
 import React from "react";
 import { useSelector } from "react-redux";
-import { getLocationChoices } from "../../redux/selectors";
+import { getLocationDataChoices } from "../../redux/selectors";
+import CardComponent from "../card";
 
 const CardListComponent = ({ width }) => {
   const cols = {
@@ -18,15 +19,14 @@ const CardListComponent = ({ width }) => {
     lg: 3,
     xl: 3,
   };
-  const choices = useSelector(getLocationChoices);
+  const choices = useSelector(getLocationDataChoices) || [];
   return (
     <Grid container>
-      <GridList cols={cols[width]}>
+      <GridList cols={cols[width]} spacing={8} cellHeight="auto">
         {choices.map((choice, index) => {
-          console.log(choice);
           return (
             <GridListTile key={`card-list-${snakeCase(choice.title)}-${index}`}>
-              <Typography>{choice.title}</Typography>;
+              <CardComponent choice={choice} />;
             </GridListTile>
           );
         })}

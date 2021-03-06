@@ -6,21 +6,48 @@ export const dataSlice = createSlice({
   initialState: {
     location: window.location.href.split("/").pop(),
     data: cyoa_data,
-    choices: {},
+    perks: [],
   },
   reducers: {
     updateLocation: (state, action) => {
       console.log(action);
       state.location = action.payload;
     },
+    updateSinglePerk: (state, action) => {
+      const choiceIndex = state.perks.findIndex((val) => {
+        return val.title === action.payload.title;
+      });
+      if (choiceIndex !== -1) {
+        state.perks = [
+          ...state.perks.filter((val, ind) => {
+            return ind !== choiceIndex;
+          }),
+        ];
+      } else {
+        state.perks = [...state.perks, action.payload];
+      }
+    },
+    updateMultiPerk: (state, action) => {
+      const choiceIndex = state.perks.findIndex((val) => {
+        return val.title === action.payload.title;
+      });
+      if (choiceIndex !== -1 && !action.payload.increase) {
+        state.perks = [
+          ...state.perks.filter((val, ind) => {
+            return ind !== choiceIndex;
+          }),
+        ];
+      } else if (action.payload.increase) {
+        state.perks = [...state.perks, action.payload];
+      }
+    },
   },
 });
 
 export const {
-  increment,
-  decrement,
-  incrementByAmount,
   updateLocation,
+  updateSinglePerk,
+  updateMultiPerk,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;
