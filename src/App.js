@@ -6,7 +6,10 @@ import ArrowNavigatorComponent from "./components/arrow-navigator";
 
 function App() {
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{ backgroundColor: "#000000FF", color: "#FFFFFFFF" }}
+    >
       <HashRouter>
         <ArrowNavigatorComponent />
         <Switch>

@@ -10,7 +10,6 @@ export const dataSlice = createSlice({
   },
   reducers: {
     updateLocation: (state, action) => {
-      console.log(action);
       state.location = action.payload;
     },
     updateSinglePerk: (state, action) => {

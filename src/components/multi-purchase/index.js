@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getLocation, getLocationChoices } from "../../redux/selectors";
 import { updateMultiPerk } from "../../redux/slice";
 
-const MultiPurchaseComponent = ({ choice }) => {
+const MultiPurchaseComponent = ({ choice, disabled, limit }) => {
   const dispatch = useDispatch();
   const location = useSelector(getLocation);
   const locationBasedFuntions = {
@@ -18,9 +18,11 @@ const MultiPurchaseComponent = ({ choice }) => {
       return purchase.title === choice.title ? 1 : 0;
     })
   );
+
   return (
     <Grid container justify="space-around" alignContent="center">
       <IconButton
+        style={{ color: "inherit" }}
         onClick={() =>
           dispatch(
             locationBasedFuntions[location]({ ...choice, increase: false })
@@ -33,6 +35,8 @@ const MultiPurchaseComponent = ({ choice }) => {
         style={{ fontWeight: 700, alignSelf: "center" }}
       >{`Purchases: ${purchases}`}</Typography>
       <IconButton
+        style={{ color: "inherit" }}
+        disabled={disabled || purchases === limit}
         onClick={() =>
           dispatch(
             locationBasedFuntions[location]({ ...choice, increase: true })

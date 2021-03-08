@@ -15,6 +15,7 @@ const ArrowNavigatorComponent = () => {
         component={Link}
         to={lrNavArray[0]}
         onClick={() => dispatch(updateLocation(lrNavArray[0]))}
+        style={{ color: "#FFFFFFFF" }}
       >
         <ArrowBack />
       </IconButton>
@@ -22,6 +23,7 @@ const ArrowNavigatorComponent = () => {
         component={Link}
         to={lrNavArray[1]}
         onClick={() => dispatch(updateLocation(lrNavArray[1]))}
+        style={{ color: "#FFFFFFFF" }}
       >
         <ArrowForward />
       </IconButton>
