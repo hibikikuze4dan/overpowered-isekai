@@ -8,7 +8,12 @@ function App() {
   return (
     <div
       className="App"
-      style={{ backgroundColor: "#000000FF", color: "#FFFFFFFF" }}
+      style={{
+        backgroundColor: "#000000FF",
+        color: "#FFFFFFFF",
+        overflowX: "hidden",
+        padding: "4rem .5rem",
+      }}
     >
       <HashRouter>
         <ArrowNavigatorComponent />

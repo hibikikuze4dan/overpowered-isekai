@@ -5,6 +5,7 @@ Some options can be bought multiple times
 Companions get 10 isekai points for powers each
 
 - companions need their own section for power selection
+  - potentially have multiple tabs in powers section
 
 World section need a rng for rolling a world
 

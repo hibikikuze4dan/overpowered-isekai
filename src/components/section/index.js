@@ -1,14 +1,34 @@
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
+import { startCase } from "lodash";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IsekaiPointsMatcher } from "../../matchers/IsekaiPoints";
-import { getLocationData } from "../../redux/selectors";
+import { getLocation, getLocationData } from "../../redux/selectors";
+import { setWorld, updateSinglePerk } from "../../redux/slice";
 import CardListComponent from "../card-list";
 import OpenerComponent from "../opener";
+import { randomNumber } from "./utils";
 
 const SectionComponent = () => {
   const sectionData = useSelector(getLocationData);
-  const { title, description } = sectionData;
+  const location = useSelector(getLocation);
+  const dispatch = useDispatch();
+  const locationBasedFuntions = {
+    perks: updateSinglePerk,
+    world: setWorld,
+  };
+  const { title, description, choices } = sectionData;
+  const onClick = () => {
+    const ran = randomNumber(0, choices.length);
+
+    dispatch(
+      locationBasedFuntions[location]({
+        random: true,
+        ...choices[ran],
+        cost: 0,
+      })
+    );
+  };
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -17,6 +37,17 @@ const SectionComponent = () => {
           description={description}
           matchers={[new IsekaiPointsMatcher("IP")]}
         />
+        {sectionData.random && (
+          <Grid container justify="center">
+            <Button
+              onClick={onClick}
+              variant="outlined"
+              style={{ color: "inherit" }}
+            >
+              Random {startCase(location)}
+            </Button>
+          </Grid>
+        )}
         <CardListComponent />
       </Grid>
     </Grid>

@@ -7,6 +7,7 @@ export const dataSlice = createSlice({
     location: window.location.href.split("/").pop(),
     data: cyoa_data,
     perks: [],
+    world: {},
   },
   reducers: {
     updateLocation: (state, action) => {
@@ -40,6 +41,9 @@ export const dataSlice = createSlice({
         state.perks = [...state.perks, action.payload];
       }
     },
+    setWorld: (state, action) => {
+      state.world = action.payload;
+    },
   },
 });
 
@@ -47,6 +51,7 @@ export const {
   updateLocation,
   updateSinglePerk,
   updateMultiPerk,
+  setWorld,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;
