@@ -1,6 +1,6 @@
 const section = {
   title: "",
-  description: "",
+  description: [""],
   choices: [],
 };
 

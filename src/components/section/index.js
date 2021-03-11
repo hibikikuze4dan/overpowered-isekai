@@ -4,7 +4,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IsekaiPointsMatcher } from "../../matchers/IsekaiPoints";
 import { getLocation, getLocationData } from "../../redux/selectors";
-import { setWorld, updateSinglePerk } from "../../redux/slice";
+import {
+  setWorld,
+  updateSinglePerk,
+  updateStartingLocation,
+} from "../../redux/slice";
 import CardListComponent from "../card-list";
 import OpenerComponent from "../opener";
 import { randomNumber } from "./utils";
@@ -16,6 +20,7 @@ const SectionComponent = () => {
   const locationBasedFuntions = {
     perks: updateSinglePerk,
     world: setWorld,
+    starting_location: updateStartingLocation,
   };
   const { title, description, choices } = sectionData;
   const onClick = () => {

@@ -5,7 +5,11 @@ import CostComponent from "../cost";
 import { CardDescriptionMatcher } from "../../matchers/CardDescription";
 import { useDispatch, useSelector } from "react-redux";
 import { getLocation, getLocationChoices } from "../../redux/selectors";
-import { updateSinglePerk, setWorld } from "../../redux/slice";
+import {
+  updateSinglePerk,
+  setWorld,
+  updateStartingLocation,
+} from "../../redux/slice";
 import MultiPurchaseComponent from "../multi-purchase";
 import { isUpgradeDisabled } from "./utils";
 import { sum } from "lodash";
@@ -56,6 +60,7 @@ const CardComponent = ({ choice }) => {
   const locationBasedFuntions = {
     perks: updateSinglePerk,
     world: setWorld,
+    starting_location: updateStartingLocation,
   };
   const upgrades = choice?.upgrades || [];
   const onClick = choice.multi

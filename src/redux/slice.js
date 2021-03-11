@@ -8,6 +8,7 @@ export const dataSlice = createSlice({
     data: cyoa_data,
     perks: [],
     world: {},
+    starting_location: [],
   },
   reducers: {
     updateLocation: (state, action) => {
@@ -44,6 +45,22 @@ export const dataSlice = createSlice({
     setWorld: (state, action) => {
       state.world = action.payload;
     },
+    updateStartingLocation: (state, action) => {
+      const choiceIndex = state.starting_location.findIndex((val) => {
+        return val.title === action.payload.title;
+      });
+      if (action.payload.parent) {
+        state.starting_location = [action.payload];
+      } else if (choiceIndex !== -1) {
+        state.starting_location = [
+          ...state.starting_location.filter((val, ind) => {
+            return ind !== choiceIndex;
+          }),
+        ];
+      } else {
+        state.starting_location = [...state.starting_location, action.payload];
+      }
+    },
   },
 });
 
@@ -52,6 +69,7 @@ export const {
   updateSinglePerk,
   updateMultiPerk,
   setWorld,
+  updateStartingLocation,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;
