@@ -4,13 +4,14 @@ import { sum } from "lodash";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLocation, getLocationChoices } from "../../redux/selectors";
-import { updateMultiPerk } from "../../redux/slice";
+import { updateMultiPerk, updateMultiPower } from "../../redux/slice";
 
 const MultiPurchaseComponent = ({ choice, disabled, limit }) => {
   const dispatch = useDispatch();
   const location = useSelector(getLocation);
   const locationBasedFuntions = {
     perks: updateMultiPerk,
+    powers: updateMultiPower,
   };
   const sectionPurchases = useSelector(getLocationChoices);
   const purchases = sum(

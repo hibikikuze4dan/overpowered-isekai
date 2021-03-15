@@ -9,6 +9,7 @@ import {
   updateSinglePerk,
   setWorld,
   updateStartingLocation,
+  updateSinglePower,
 } from "../../redux/slice";
 import MultiPurchaseComponent from "../multi-purchase";
 import { isUpgradeDisabled } from "./utils";
@@ -61,6 +62,7 @@ const CardComponent = ({ choice }) => {
     perks: updateSinglePerk,
     world: setWorld,
     starting_location: updateStartingLocation,
+    powers: updateSinglePower,
   };
   const upgrades = choice?.upgrades || [];
   const onClick = choice.multi
@@ -99,10 +101,11 @@ const CardComponent = ({ choice }) => {
             const upgradePicked = sectionPurchases.some(
               (purchase) => purchase.title === upgrade.title
             );
+            const UpgradeCardWrapper = upgrade.multi ? Grid : Button;
 
             return (
               <Grid key={`choice-card-upgrade-${index}`} item xs={12}>
-                <CardWrapper
+                <UpgradeCardWrapper
                   onClick={upgradeOnClick}
                   disabled={isUpgradeDisabled(picked, upgradePicked)}
                   fullWidth
@@ -116,7 +119,7 @@ const CardComponent = ({ choice }) => {
                     disabled={isUpgradeDisabled(picked, upgradePicked)}
                     choice={upgrade}
                   />
-                </CardWrapper>
+                </UpgradeCardWrapper>
               </Grid>
             );
           })}

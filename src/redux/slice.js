@@ -9,6 +9,7 @@ export const dataSlice = createSlice({
     perks: [],
     world: {},
     starting_location: [],
+    powers: [],
   },
   reducers: {
     updateLocation: (state, action) => {
@@ -61,6 +62,34 @@ export const dataSlice = createSlice({
         state.starting_location = [...state.starting_location, action.payload];
       }
     },
+    updateSinglePower: (state, action) => {
+      const choiceIndex = state.powers.findIndex((val) => {
+        return val.title === action.payload.title;
+      });
+      if (choiceIndex !== -1) {
+        state.powers = [
+          ...state.powers.filter((val, ind) => {
+            return ind !== choiceIndex;
+          }),
+        ];
+      } else {
+        state.powers = [...state.powers, action.payload];
+      }
+    },
+    updateMultiPower: (state, action) => {
+      const choiceIndex = state.powers.findIndex((val) => {
+        return val.title === action.payload.title;
+      });
+      if (choiceIndex !== -1 && !action.payload.increase) {
+        state.powers = [
+          ...state.powers.filter((val, ind) => {
+            return ind !== choiceIndex;
+          }),
+        ];
+      } else if (action.payload.increase) {
+        state.powers = [...state.powers, action.payload];
+      }
+    },
   },
 });
 
@@ -70,6 +99,8 @@ export const {
   updateMultiPerk,
   setWorld,
   updateStartingLocation,
+  updateSinglePower,
+  updateMultiPower,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;
