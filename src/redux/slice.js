@@ -10,6 +10,7 @@ export const dataSlice = createSlice({
     world: {},
     starting_location: [],
     powers: [],
+    drawbacks: [],
   },
   reducers: {
     updateLocation: (state, action) => {
@@ -90,6 +91,34 @@ export const dataSlice = createSlice({
         state.powers = [...state.powers, action.payload];
       }
     },
+    updateSingleDrawback: (state, action) => {
+      const choiceIndex = state.drawbacks.findIndex((val) => {
+        return val.title === action.payload.title;
+      });
+      if (choiceIndex !== -1) {
+        state.drawbacks = [
+          ...state.drawbacks.filter((val, ind) => {
+            return ind !== choiceIndex;
+          }),
+        ];
+      } else {
+        state.drawbacks = [...state.drawbacks, action.payload];
+      }
+    },
+    updateMultiDrawback: (state, action) => {
+      const choiceIndex = state.drawbacks.findIndex((val) => {
+        return val.title === action.payload.title;
+      });
+      if (choiceIndex !== -1 && !action.payload.increase) {
+        state.drawbacks = [
+          ...state.drawbacks.filter((val, ind) => {
+            return ind !== choiceIndex;
+          }),
+        ];
+      } else if (action.payload.increase) {
+        state.drawbacks = [...state.drawbacks, action.payload];
+      }
+    },
   },
 });
 
@@ -101,6 +130,8 @@ export const {
   updateStartingLocation,
   updateSinglePower,
   updateMultiPower,
+  updateSingleDrawback,
+  updateMultiDrawback,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

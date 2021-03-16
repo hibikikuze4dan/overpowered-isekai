@@ -43,3 +43,17 @@ export const getLeftRightNavigationArray = createSelector(
     return [leftNav, titles[(currentLocationIndex + 1) % titles.length]];
   }
 );
+
+export const getAllChoices = createSelector(getStateData, (data) => {
+  return [
+    ...data.perks,
+    data.world,
+    ...data.starting_location,
+    ...data.powers,
+    ...data.drawbacks,
+  ];
+});
+
+export const getAllChoicesTitles = createSelector(getAllChoices, (choices) => {
+  return choices.map((choice) => choice.title);
+});

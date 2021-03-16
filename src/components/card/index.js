@@ -4,23 +4,65 @@ import Text from "../text";
 import CostComponent from "../cost";
 import { CardDescriptionMatcher } from "../../matchers/CardDescription";
 import { useDispatch, useSelector } from "react-redux";
-import { getLocation, getLocationChoices } from "../../redux/selectors";
+import {
+  getAllChoicesTitles,
+  getLocation,
+  getLocationChoices,
+} from "../../redux/selectors";
 import {
   updateSinglePerk,
   setWorld,
   updateStartingLocation,
   updateSinglePower,
+  updateSingleDrawback,
 } from "../../redux/slice";
 import MultiPurchaseComponent from "../multi-purchase";
-import { isUpgradeDisabled } from "./utils";
+import { isUpgradeDisabled, requirementsMet } from "./utils";
 import { sum } from "lodash";
 
-const CardBodyComponent = ({ choice, disabled, limit }) => {
+const CardBodyComponent = ({ choice, disabled, limit, include, exclude }) => {
+  const incString = (
+    <>
+      <span className="Interweave-Red">{include[0]}</span>
+      {include[1] && (
+        <>
+          {" "}
+          or <span className="Interweave-Red">{include[1]}</span>
+        </>
+      )}
+      {include[0] && exclude[0] !== undefined && exclude[1] === undefined
+        ? " and "
+        : ""}
+      {exclude[0] !== undefined && exclude[1] !== undefined ? ", " : ""}
+    </>
+  );
+  const renderRequirements = include.length !== 0 || exclude.length !== 0;
+  const exString = (
+    <span className="Requirements-String">
+      Requirement: {incString}
+      {exclude[0] && (
+        <>
+          Not <span className="Interweave-Red">{exclude[0]}</span>
+        </>
+      )}
+      {exclude[1] && (
+        <>
+          {" "}
+          and Not <span className="Interweave-Red">{exclude[1]}</span>
+        </>
+      )}
+    </span>
+  );
   return (
     <Grid container>
       <Grid item xs={12}>
         <Text text={choice.title} />
       </Grid>
+      {renderRequirements && (
+        <Grid item xs={12}>
+          {exString}.
+        </Grid>
+      )}
       <Grid item xs={12}>
         <CostComponent cost={choice.cost} />
       </Grid>
@@ -63,6 +105,7 @@ const CardComponent = ({ choice }) => {
     world: setWorld,
     starting_location: updateStartingLocation,
     powers: updateSinglePower,
+    drawbacks: updateSingleDrawback,
   };
   const upgrades = choice?.upgrades || [];
   const onClick = choice.multi
@@ -83,14 +126,24 @@ const CardComponent = ({ choice }) => {
     : 0;
 
   const backgroundColor = (ispicked) => (ispicked ? "green" : "inherit");
+  const include = choice?.include || [];
+  const exclude = choice?.exclude || [];
+  const purchaseTitles = useSelector(getAllChoicesTitles);
+  const areRequirementsMet = requirementsMet(purchaseTitles, include, exclude);
   return (
     <Grid container>
       <CardWrapper
         onClick={onClick}
+        disabled={!areRequirementsMet}
         fullWidth
         style={{ color: "#FFFFFFFF", backgroundColor: backgroundColor(picked) }}
       >
-        <CardBodyComponent choice={choice} />
+        <CardBodyComponent
+          include={include}
+          exclude={exclude}
+          disabled={!areRequirementsMet}
+          choice={choice}
+        />
       </CardWrapper>
       <Grid item xs={12}>
         <Grid container>
@@ -107,7 +160,10 @@ const CardComponent = ({ choice }) => {
               <Grid key={`choice-card-upgrade-${index}`} item xs={12}>
                 <UpgradeCardWrapper
                   onClick={upgradeOnClick}
-                  disabled={isUpgradeDisabled(picked, upgradePicked)}
+                  disabled={
+                    isUpgradeDisabled(picked, upgradePicked) ||
+                    !areRequirementsMet
+                  }
                   fullWidth
                   style={{
                     color: "#FFFFFFFF",
@@ -115,8 +171,13 @@ const CardComponent = ({ choice }) => {
                   }}
                 >
                   <CardBodyComponent
+                    include={include}
+                    exclude={exclude}
                     limit={timesParentPicked}
-                    disabled={isUpgradeDisabled(picked, upgradePicked)}
+                    disabled={
+                      isUpgradeDisabled(picked, upgradePicked) ||
+                      !areRequirementsMet
+                    }
                     choice={upgrade}
                   />
                 </UpgradeCardWrapper>
