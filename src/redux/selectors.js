@@ -1,6 +1,7 @@
+import { omit } from "lodash";
 import { createSelector } from "reselect";
 
-const getStateData = (state) => state.data;
+export const getStateData = (state) => state.data;
 
 export const getLocation = (state) => state.data.location;
 
@@ -54,6 +55,14 @@ export const getAllChoices = createSelector(getStateData, (data) => {
   ];
 });
 
+export const getAllPurchasesObject = createSelector(getStateData, (data) => {
+  return omit(data, ["location, data"]);
+});
+
 export const getAllChoicesTitles = createSelector(getAllChoices, (choices) => {
   return choices.map((choice) => choice.title);
+});
+
+export const getSaveTitle = createSelector(getStateData, (data) => {
+  return data.saveTitle;
 });

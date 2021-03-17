@@ -6,6 +6,7 @@ export const dataSlice = createSlice({
   initialState: {
     location: window.location.href.split("/").pop(),
     data: cyoa_data,
+    saveTitle: "",
     perks: [],
     world: {},
     starting_location: [],
@@ -13,6 +14,9 @@ export const dataSlice = createSlice({
     drawbacks: [],
   },
   reducers: {
+    updateSaveTitle: (state, action) => {
+      state.saveTitle = action.payload;
+    },
     updateLocation: (state, action) => {
       state.location = action.payload;
     },
@@ -119,10 +123,17 @@ export const dataSlice = createSlice({
         state.drawbacks = [...state.drawbacks, action.payload];
       }
     },
+    loadState: (state, action) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
   },
 });
 
 export const {
+  updateSaveTitle,
   updateLocation,
   updateSinglePerk,
   updateMultiPerk,
@@ -132,6 +143,7 @@ export const {
   updateMultiPower,
   updateSingleDrawback,
   updateMultiDrawback,
+  loadState,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

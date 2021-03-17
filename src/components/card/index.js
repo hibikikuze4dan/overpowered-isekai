@@ -135,7 +135,7 @@ const CardComponent = ({ choice }) => {
       <CardWrapper
         onClick={onClick}
         disabled={!areRequirementsMet}
-        fullWidth
+        fullWidth={choice.multi ? null : true}
         style={{ color: "#FFFFFFFF", backgroundColor: backgroundColor(picked) }}
       >
         <CardBodyComponent
@@ -164,7 +164,7 @@ const CardComponent = ({ choice }) => {
                     isUpgradeDisabled(picked, upgradePicked) ||
                     !areRequirementsMet
                   }
-                  fullWidth
+                  fullWidth={choice.multi ? null : true}
                   style={{
                     color: "#FFFFFFFF",
                     backgroundColor: backgroundColor(upgradePicked),
