@@ -7,9 +7,7 @@ import SaveDialogComponent from "../save-dialog";
 
 const ApplicationBarComponent = () => {
   const [saveDialogOpen, toggleSaveDialog] = useState(false);
-  const data = useSelector(getStateData);
   const costs = useSelector(getAllCostsSum);
-  console.log(data);
   const onSaveButtonClick = () => {
     toggleSaveDialog(!saveDialogOpen);
   };

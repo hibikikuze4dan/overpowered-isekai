@@ -93,7 +93,6 @@ const SaveDialogComponent = ({ open, onClose }) => {
                 >
                   <MenuItem value="">*Choose a Save*</MenuItem>
                   {titles.map((title, index) => {
-                    console.log(title);
                     return (
                       <MenuItem
                         value={title}
@@ -123,7 +122,6 @@ const SaveDialogComponent = ({ open, onClose }) => {
                 >
                   <MenuItem value="">*Choose a Save*</MenuItem>
                   {titles.map((title, index) => {
-                    console.log(title);
                     return (
                       <MenuItem
                         value={title}

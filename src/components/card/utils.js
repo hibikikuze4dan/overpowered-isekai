@@ -20,6 +20,5 @@ export const noExcludes = (purchaseTitles, exs) => {
 };
 
 export const requirementsMet = (puchasesTitles, incs, exs) => {
-  console.log(puchasesTitles);
   return hasIncluded(puchasesTitles, incs) && noExcludes(puchasesTitles, exs);
 };
