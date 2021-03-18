@@ -14,7 +14,10 @@ const ArrowNavigatorComponent = () => {
       <IconButton
         component={Link}
         to={lrNavArray[0]}
-        onClick={() => dispatch(updateLocation(lrNavArray[0]))}
+        onClick={() => {
+          dispatch(updateLocation(lrNavArray[0]));
+          window.scrollTo({ top: window.screenTop, behavior: "smooth" });
+        }}
         style={{ color: "#FFFFFFFF" }}
       >
         <ArrowBack />
@@ -22,7 +25,10 @@ const ArrowNavigatorComponent = () => {
       <IconButton
         component={Link}
         to={lrNavArray[1]}
-        onClick={() => dispatch(updateLocation(lrNavArray[1]))}
+        onClick={() => {
+          dispatch(updateLocation(lrNavArray[1]));
+          window.scrollTo({ top: window.screenTop, behavior: "smooth" });
+        }}
         style={{ color: "#FFFFFFFF" }}
       >
         <ArrowForward />

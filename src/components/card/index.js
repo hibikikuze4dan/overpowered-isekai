@@ -56,7 +56,7 @@ const CardBodyComponent = ({ choice, disabled, limit, include, exclude }) => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Text text={choice.title} />
+        <Text variant="h4" text={choice.title} />
       </Grid>
       {renderRequirements && (
         <Grid item xs={12}>
@@ -125,7 +125,8 @@ const CardComponent = ({ choice }) => {
       )
     : 0;
 
-  const backgroundColor = (ispicked) => (ispicked ? "green" : "inherit");
+  const backgroundColor = (ispicked, dis) =>
+    ispicked ? "green" : dis ? "grey" : "inherit";
   const include = choice?.include || [];
   const exclude = choice?.exclude || [];
   const purchaseTitles = useSelector(getAllChoicesTitles);
@@ -136,7 +137,11 @@ const CardComponent = ({ choice }) => {
         onClick={onClick}
         disabled={!areRequirementsMet}
         fullWidth={choice.multi ? null : true}
-        style={{ color: "#FFFFFFFF", backgroundColor: backgroundColor(picked) }}
+        style={{
+          color: "#FFFFFFFF",
+          textTransform: "none",
+          backgroundColor: backgroundColor(picked, !areRequirementsMet),
+        }}
       >
         <CardBodyComponent
           include={include}
@@ -167,7 +172,12 @@ const CardComponent = ({ choice }) => {
                   fullWidth={choice.multi ? null : true}
                   style={{
                     color: "#FFFFFFFF",
-                    backgroundColor: backgroundColor(upgradePicked),
+                    backgroundColor: backgroundColor(
+                      upgradePicked,
+                      isUpgradeDisabled(picked, upgradePicked) ||
+                        !areRequirementsMet
+                    ),
+                    textTransform: "none",
                   }}
                 >
                   <CardBodyComponent

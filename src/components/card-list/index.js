@@ -17,14 +17,17 @@ const CardListComponent = ({ width }) => {
   return (
     <Grid container>
       <GridList
-        style={{ justifyContent: "space-around" }}
+        style={{ justifyContent: "space-around", padding: "8px 8px" }}
         cols={cols[width]}
         spacing={8}
         cellHeight="auto"
       >
         {choices.map((choice, index) => {
           return (
-            <GridListTile key={`card-list-${snakeCase(choice.title)}-${index}`}>
+            <GridListTile
+              key={`card-list-${snakeCase(choice.title)}-${index}`}
+              style={{ border: "1px solid white" }}
+            >
               <CardComponent choice={choice} />;
             </GridListTile>
           );

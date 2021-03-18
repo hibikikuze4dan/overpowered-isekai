@@ -47,7 +47,11 @@ const SectionComponent = () => {
             <Button
               onClick={onClick}
               variant="outlined"
-              style={{ color: "inherit" }}
+              style={{
+                color: "inherit",
+                border: "1px solid white",
+                marginBottom: "12px",
+              }}
             >
               Random {startCase(location)}
             </Button>

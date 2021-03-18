@@ -59,6 +59,30 @@ export const getAllPurchasesObject = createSelector(getStateData, (data) => {
   return omit(data, ["location, data"]);
 });
 
+const getAllPurchasesObjectExcludingSaveTitle = createSelector(
+  getAllPurchasesObject,
+  (obj) => omit(obj, ["saveTitle"])
+);
+
+export const getAllCosts = createSelector(
+  getAllPurchasesObjectExcludingSaveTitle,
+  (obj) => {
+    return [
+      ...obj.perks,
+      ...obj.starting_location,
+      ...obj.drawbacks,
+      ...obj.powers,
+      obj.world,
+    ].map((purchase) => purchase?.cost || 0);
+  }
+);
+
+export const getAllCostsSum = createSelector(getAllCosts, (costs) => {
+  return costs.reduce((acc, curr) => {
+    return curr + acc;
+  }, 0);
+});
+
 export const getAllChoicesTitles = createSelector(getAllChoices, (choices) => {
   return choices.map((choice) => choice.title);
 });
