@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/overpowered-isekai/static/css/main.accfc592.chunk.css",
-    "main.js": "/overpowered-isekai/static/js/main.34f39c3d.chunk.js",
-    "main.js.map": "/overpowered-isekai/static/js/main.34f39c3d.chunk.js.map",
+    "main.js": "/overpowered-isekai/static/js/main.a9683fde.chunk.js",
+    "main.js.map": "/overpowered-isekai/static/js/main.a9683fde.chunk.js.map",
     "runtime-main.js": "/overpowered-isekai/static/js/runtime-main.4e938683.js",
     "runtime-main.js.map": "/overpowered-isekai/static/js/runtime-main.4e938683.js.map",
-    "static/js/2.076baea5.chunk.js": "/overpowered-isekai/static/js/2.076baea5.chunk.js",
-    "static/js/2.076baea5.chunk.js.map": "/overpowered-isekai/static/js/2.076baea5.chunk.js.map",
+    "static/js/2.4513b7b9.chunk.js": "/overpowered-isekai/static/js/2.4513b7b9.chunk.js",
+    "static/js/2.4513b7b9.chunk.js.map": "/overpowered-isekai/static/js/2.4513b7b9.chunk.js.map",
     "index.html": "/overpowered-isekai/index.html",
     "static/css/main.accfc592.chunk.css.map": "/overpowered-isekai/static/css/main.accfc592.chunk.css.map",
-    "static/js/2.076baea5.chunk.js.LICENSE.txt": "/overpowered-isekai/static/js/2.076baea5.chunk.js.LICENSE.txt"
+    "static/js/2.4513b7b9.chunk.js.LICENSE.txt": "/overpowered-isekai/static/js/2.4513b7b9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4e938683.js",
-    "static/js/2.076baea5.chunk.js",
+    "static/js/2.4513b7b9.chunk.js",
     "static/css/main.accfc592.chunk.css",
-    "static/js/main.34f39c3d.chunk.js"
+    "static/js/main.a9683fde.chunk.js"
   ]
 }
