@@ -19,6 +19,9 @@ export const noExcludes = (purchaseTitles, exs) => {
     : exs.every((exclude) => !purchaseTitles.includes(exclude));
 };
 
-export const requirementsMet = (puchasesTitles, incs, exs) => {
-  return hasIncluded(puchasesTitles, incs) && noExcludes(puchasesTitles, exs);
+export const requirementsMet = (puchasesTitles, incs, exs, picked) => {
+  return (
+    (hasIncluded(puchasesTitles, incs) && noExcludes(puchasesTitles, exs)) ||
+    picked
+  );
 };

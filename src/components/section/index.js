@@ -1,6 +1,13 @@
-import { Grid, Button } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  Snackbar,
+  withWidth,
+  IconButton,
+} from "@material-ui/core";
+import { Close } from "@material-ui/icons";
 import { startCase } from "lodash";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IsekaiPointsMatcher } from "../../matchers/IsekaiPoints";
 import { getLocation, getLocationData } from "../../redux/selectors";
@@ -13,7 +20,9 @@ import CardListComponent from "../card-list";
 import OpenerComponent from "../opener";
 import { randomNumber } from "./utils";
 
-const SectionComponent = () => {
+const SectionComponent = ({ width }) => {
+  const [isSnackOpen, toggleSnackOpen] = useState(false);
+  const [snackMessage, setSnackMessage] = useState("");
   const sectionData = useSelector(getLocationData);
   const location = useSelector(getLocation);
   const dispatch = useDispatch();
@@ -33,6 +42,8 @@ const SectionComponent = () => {
         cost: 0,
       })
     );
+    setSnackMessage(`${choices[ran].title} picked.`);
+    toggleSnackOpen(true);
   };
   return (
     <Grid container>
@@ -59,8 +70,29 @@ const SectionComponent = () => {
         )}
         <CardListComponent />
       </Grid>
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={isSnackOpen}
+        onClose={(e, reason) => {
+          if (reason === "clickaway") {
+            return;
+          }
+          toggleSnackOpen(false);
+        }}
+        message={snackMessage}
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={() => toggleSnackOpen(false)}
+          >
+            <Close fontSize="small" />
+          </IconButton>
+        }
+      />
     </Grid>
   );
 };
 
-export default SectionComponent;
+export default withWidth()(SectionComponent);

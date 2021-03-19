@@ -117,20 +117,22 @@ const CardComponent = ({ choice }) => {
   const picked = Array.isArray(sectionPurchases)
     ? sectionPurchases.some((purchase) => purchase.title === choice.title)
     : sectionPurchases.title === choice.title;
-  const timesParentPicked = Array.isArray(sectionPurchases)
-    ? sum(
-        sectionPurchases.map((purchase) =>
-          purchase.title === choice.title ? 1 : 0
-        )
-      )
-    : 0;
+  const limits = {
+    "Anime Quirk": 3,
+    "Lost Sense": 5,
+  };
 
   const backgroundColor = (ispicked, dis) =>
     ispicked ? "green" : dis ? "grey" : "inherit";
   const include = choice?.include || [];
   const exclude = choice?.exclude || [];
   const purchaseTitles = useSelector(getAllChoicesTitles);
-  const areRequirementsMet = requirementsMet(purchaseTitles, include, exclude);
+  const areRequirementsMet = requirementsMet(
+    purchaseTitles,
+    include,
+    exclude,
+    picked
+  );
   return (
     <Grid container>
       <CardWrapper
@@ -147,6 +149,7 @@ const CardComponent = ({ choice }) => {
           include={include}
           exclude={exclude}
           disabled={!areRequirementsMet}
+          limit={limits[choice.title]}
           choice={choice}
         />
       </CardWrapper>
@@ -183,7 +186,7 @@ const CardComponent = ({ choice }) => {
                   <CardBodyComponent
                     include={include}
                     exclude={exclude}
-                    limit={timesParentPicked}
+                    limit={limits[upgrade.title]}
                     disabled={
                       isUpgradeDisabled(picked, upgradePicked) ||
                       !areRequirementsMet
