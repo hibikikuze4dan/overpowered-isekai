@@ -18,7 +18,7 @@ const ApplicationBarComponent = ({ width }) => {
     toggleSaveDialog(!saveDialogOpen);
   };
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Grid container justify="space-around">
         <IconButton onClick={onSaveButtonClick}>
           <Save />
