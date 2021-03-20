@@ -1,11 +1,17 @@
-import { AppBar, Grid, IconButton, Typography } from "@material-ui/core";
+import {
+  AppBar,
+  Grid,
+  IconButton,
+  Typography,
+  withWidth,
+} from "@material-ui/core";
 import { Save } from "@material-ui/icons";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { getAllCostsSum, getStateData } from "../../redux/selectors";
 import SaveDialogComponent from "../save-dialog";
 
-const ApplicationBarComponent = () => {
+const ApplicationBarComponent = ({ width }) => {
   const [saveDialogOpen, toggleSaveDialog] = useState(false);
   const costs = useSelector(getAllCostsSum);
   const onSaveButtonClick = () => {
@@ -17,7 +23,10 @@ const ApplicationBarComponent = () => {
         <IconButton onClick={onSaveButtonClick}>
           <Save />
         </IconButton>
-        <Typography style={{ alignSelf: "center" }}>{70 + costs}</Typography>
+        <Typography style={{ alignSelf: "center" }}>
+          {["xs", "sm"].includes(width) ? "IP: " : "Isekai Points: "}
+          {70 + costs}
+        </Typography>
       </Grid>
       <SaveDialogComponent
         open={saveDialogOpen}
@@ -27,4 +36,4 @@ const ApplicationBarComponent = () => {
   );
 };
 
-export default ApplicationBarComponent;
+export default withWidth()(ApplicationBarComponent);

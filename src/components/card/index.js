@@ -1,4 +1,4 @@
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import React, { Fragment } from "react";
 import Text from "../text";
 import CostComponent from "../cost";
@@ -20,7 +20,14 @@ import MultiPurchaseComponent from "../multi-purchase";
 import { isUpgradeDisabled, requirementsMet } from "./utils";
 import { sum } from "lodash";
 
-const CardBodyComponent = ({ choice, disabled, limit, include, exclude }) => {
+const CardBodyComponent = ({
+  picked,
+  choice,
+  disabled,
+  limit,
+  include,
+  exclude,
+}) => {
   const incString = (
     <>
       <span className="Interweave-Red">{include[0]}</span>
@@ -89,6 +96,11 @@ const CardBodyComponent = ({ choice, disabled, limit, include, exclude }) => {
           );
         })}
       </Grid>
+      {picked && choice.title === "Stand" && (
+        <Grid item xs={12}>
+          <Typography>*See top of page for Stand Power selection.*</Typography>
+        </Grid>
+      )}
     </Grid>
   );
 };
@@ -191,6 +203,7 @@ const CardComponent = ({ choice }) => {
                       isUpgradeDisabled(picked, upgradePicked) ||
                       !areRequirementsMet
                     }
+                    picked={upgradePicked}
                     choice={upgrade}
                   />
                 </UpgradeCardWrapper>
