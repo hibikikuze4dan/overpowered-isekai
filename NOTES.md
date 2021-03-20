@@ -1,27 +1,27 @@
-Some options can be bought multiple times
+~~Some options can be bought multiple times~~
 
-'Fictional Friend' may have the ability to be purchased multiple times
+~~'Fictional Friend' may have the ability to be purchased multiple times~~
 
 Companions get 10 isekai points for powers each
 
 - companions need their own section for power selection
   - potentially have multiple tabs in powers section
 
-World section need a rng for rolling a world
+~~World section need a rng for rolling a world~~
 
-Starting location need a rng for selecting starting location
+~~Starting location need a rng for selecting starting location~~
 
-- upgrades still const points
+- ~~upgrades still const points~~
 
 Manifest Spririt needs it's own section for power selection
 
-Some multi choices have limits
+~~Some multi choices have limits~~
 
-- Ex.) Lost Sense
+- ~~Ex.) Lost Sense~~
 
-Some drawbacks have requirements
+~~Some drawbacks have requirements~~
 
-- you must either have or not have a certain choice/drawback
+- ~~you must either have or not have a certain choice/drawback~~
 
 Section for Nemesis for distribution of powers?
 

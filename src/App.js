@@ -4,6 +4,24 @@ import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 import RoutesComponent from "./components/routes";
 import ArrowNavigatorComponent from "./components/arrow-navigator";
 import ApplicationBarComponent from "./components/app-bar";
+import { ThemeProvider } from "@material-ui/styles";
+import { createMuiTheme } from "@material-ui/core";
+
+const theme = createMuiTheme({
+  palette: {
+    type: "dark",
+    text: {
+      primary: "#FFFFFF",
+    },
+  },
+  overrides: {
+    MuiOutlinedInput: {
+      root: {
+        borderColor: "white",
+      },
+    },
+  },
+});
 
 function App() {
   return (
@@ -15,17 +33,19 @@ function App() {
         overflowX: "hidden",
       }}
     >
-      <ApplicationBarComponent />
-      <HashRouter>
-        <div style={{ padding: "4rem .5rem" }}>
-          <ArrowNavigatorComponent />
-          <Switch>
-            <RoutesComponent />
-          </Switch>
-          <Route exact path="/" render={() => <Redirect to="/opening" />} />
-          <ArrowNavigatorComponent />
-        </div>
-      </HashRouter>
+      <ThemeProvider theme={theme}>
+        <ApplicationBarComponent />
+        <HashRouter>
+          <div style={{ padding: "4rem .5rem" }}>
+            <ArrowNavigatorComponent />
+            <Switch>
+              <RoutesComponent />
+            </Switch>
+            <Route exact path="/" render={() => <Redirect to="/opening" />} />
+            <ArrowNavigatorComponent />
+          </div>
+        </HashRouter>
+      </ThemeProvider>
     </div>
   );
 }
