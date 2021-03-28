@@ -55,6 +55,30 @@ export const getAllChoices = createSelector(getStateData, (data) => {
   ];
 });
 
+const getPowers = createSelector(getStateData, (data) => data.powers);
+const getStandPowers = createSelector(
+  getStateData,
+  (data) => data.stand_powers
+);
+
+export const getSectionTitlesArrayWithExclusions = createSelector(
+  getSectionTitlesArray,
+  getPowers,
+  (titles, powers) => {
+    return powers.find((power) => power.title === "Stand")
+      ? titles
+      : titles.filter((title) => title !== "stand_powers");
+  }
+);
+
+export const disableStandPowersSection = createSelector(
+  getPowers,
+  getLocation,
+  (powers, location) =>
+    !powers.find((power) => power.title === "Stand") &&
+    location === "stand_powers"
+);
+
 export const getAllPurchasesObject = createSelector(getStateData, (data) => {
   return omit(data, ["location, data"]);
 });
@@ -72,16 +96,27 @@ export const getAllCosts = createSelector(
       ...obj.starting_location,
       ...obj.drawbacks,
       ...obj.powers,
+      ...obj.stand_powers,
       obj.world,
     ].map((purchase) => purchase?.cost || 0);
   }
 );
 
-export const getAllCostsSum = createSelector(getAllCosts, (costs) => {
-  return costs.reduce((acc, curr) => {
-    return curr + acc;
-  }, 0);
-});
+const getStandPointsModifier = createSelector(getStandPowers, (powers) =>
+  powers.length > 0 ? 5 : 0
+);
+
+export const getAllCostsSum = createSelector(
+  getAllCosts,
+  getStandPointsModifier,
+  (costs, standModifier) => {
+    return (
+      costs.reduce((acc, curr) => {
+        return curr + acc;
+      }, 0) + standModifier
+    );
+  }
+);
 
 export const getAllChoicesTitles = createSelector(getAllChoices, (choices) => {
   return choices.map((choice) => choice.title);

@@ -11,6 +11,7 @@ export const dataSlice = createSlice({
     world: {},
     starting_location: [],
     powers: [],
+    stand_powers: [],
     drawbacks: [],
   },
   reducers: {
@@ -80,6 +81,9 @@ export const dataSlice = createSlice({
       } else {
         state.powers = [...state.powers, action.payload];
       }
+      if (action.payload.title === "Stand") {
+        state.stand_powers = [];
+      }
     },
     updateMultiPower: (state, action) => {
       const choiceIndex = state.powers.findIndex((val) => {
@@ -93,6 +97,45 @@ export const dataSlice = createSlice({
         ];
       } else if (action.payload.increase) {
         state.powers = [...state.powers, action.payload];
+      }
+    },
+    updateSingleStandPower: (state, action) => {
+      if (action.payload?.upgrades) {
+        state.stand_powers = [action.payload];
+      } else {
+        const choiceIndex = state.stand_powers.findIndex((val) => {
+          return val.title === action.payload.title;
+        });
+        state.stand_powers =
+          choiceIndex !== -1
+            ? [
+                ...state.stand_powers.filter((val, ind) => {
+                  return ind !== choiceIndex;
+                }),
+              ]
+            : (state.stand_powers = [...state.stand_powers, action.payload]);
+      }
+    },
+    updateMultiStandPower: (state, action) => {
+      const firstPower = state.stand_powers[0];
+      if (
+        action.payload?.upgrades &&
+        firstPower?.title !== action.payload.title
+      ) {
+        state.stand_powers = [action.payload];
+      } else {
+        const choiceIndex = state.stand_powers.findIndex((val) => {
+          return val.title === action.payload.title;
+        });
+        if (choiceIndex !== -1 && !action.payload.increase) {
+          state.stand_powers = [
+            ...state.stand_powers.filter((val, ind) => {
+              return ind !== choiceIndex;
+            }),
+          ];
+        } else if (action.payload.increase) {
+          state.stand_powers = [...state.stand_powers, action.payload];
+        }
       }
     },
     updateSingleDrawback: (state, action) => {
@@ -141,6 +184,8 @@ export const {
   updateStartingLocation,
   updateSinglePower,
   updateMultiPower,
+  updateSingleStandPower,
+  updateMultiStandPower,
   updateSingleDrawback,
   updateMultiDrawback,
   loadState,

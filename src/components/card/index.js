@@ -5,6 +5,7 @@ import CostComponent from "../cost";
 import { CardDescriptionMatcher } from "../../matchers/CardDescription";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  disableStandPowersSection,
   getAllChoicesTitles,
   getLocation,
   getLocationChoices,
@@ -15,6 +16,7 @@ import {
   updateStartingLocation,
   updateSinglePower,
   updateSingleDrawback,
+  updateSingleStandPower,
 } from "../../redux/slice";
 import MultiPurchaseComponent from "../multi-purchase";
 import { isUpgradeDisabled, requirementsMet } from "./utils";
@@ -117,6 +119,7 @@ const CardComponent = ({ choice }) => {
     world: setWorld,
     starting_location: updateStartingLocation,
     powers: updateSinglePower,
+    stand_powers: updateSingleStandPower,
     drawbacks: updateSingleDrawback,
   };
   const upgrades = choice?.upgrades || [];
@@ -133,18 +136,18 @@ const CardComponent = ({ choice }) => {
     "Anime Quirk": 3,
     "Lost Sense": 5,
   };
+  const shouldDisableStandPowersSection = useSelector(
+    disableStandPowersSection
+  );
 
   const backgroundColor = (ispicked, dis) =>
     ispicked ? "green" : dis ? "grey" : "inherit";
   const include = choice?.include || [];
   const exclude = choice?.exclude || [];
   const purchaseTitles = useSelector(getAllChoicesTitles);
-  const areRequirementsMet = requirementsMet(
-    purchaseTitles,
-    include,
-    exclude,
-    picked
-  );
+  const areRequirementsMet = shouldDisableStandPowersSection
+    ? false
+    : requirementsMet(purchaseTitles, include, exclude, picked);
   return (
     <Grid container>
       <CardWrapper
