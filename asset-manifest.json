@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/overpowered-isekai/static/css/main.accfc592.chunk.css",
-    "main.js": "/overpowered-isekai/static/js/main.10dc99c7.chunk.js",
-    "main.js.map": "/overpowered-isekai/static/js/main.10dc99c7.chunk.js.map",
+    "main.js": "/overpowered-isekai/static/js/main.fb686c71.chunk.js",
+    "main.js.map": "/overpowered-isekai/static/js/main.fb686c71.chunk.js.map",
     "runtime-main.js": "/overpowered-isekai/static/js/runtime-main.4e938683.js",
     "runtime-main.js.map": "/overpowered-isekai/static/js/runtime-main.4e938683.js.map",
     "static/js/2.cd42535e.chunk.js": "/overpowered-isekai/static/js/2.cd42535e.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.4e938683.js",
     "static/js/2.cd42535e.chunk.js",
     "static/css/main.accfc592.chunk.css",
-    "static/js/main.10dc99c7.chunk.js"
+    "static/js/main.fb686c71.chunk.js"
   ]
 }
