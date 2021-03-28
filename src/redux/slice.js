@@ -170,6 +170,7 @@ export const dataSlice = createSlice({
       return {
         ...state,
         ...action.payload,
+        data: cyoa_data,
       };
     },
   },
