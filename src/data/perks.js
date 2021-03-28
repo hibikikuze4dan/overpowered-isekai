@@ -139,4 +139,18 @@ const perks = {
   ],
 };
 
+const images = [
+  "https://i.imgur.com/YYB9SJj.png",
+  "https://i.imgur.com/ytkYQwq.png",
+  "https://i.imgur.com/WI88gK4.png",
+  "https://i.imgur.com/zHRaxvW.png",
+  "https://i.imgur.com/lDaK6Fm.png",
+  "https://i.imgur.com/WYtigQ9.png",
+];
+
+perks.choices = perks.choices.map((choice, index) => ({
+  ...choice,
+  src: images[index],
+}));
+
 export default perks;

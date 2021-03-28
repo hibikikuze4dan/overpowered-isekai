@@ -218,4 +218,33 @@ const drawbacks = {
   ],
 };
 
+const images = [
+  "https://i.imgur.com/GvL6dKA.png",
+  "https://i.imgur.com/KFdlTwm.png",
+  "https://i.imgur.com/f3gjnSP.png",
+  "https://i.imgur.com/ICy4aE0.png",
+  "https://i.imgur.com/i6rsmMD.png",
+  "https://i.imgur.com/SRXdUlJ.png",
+  "https://i.imgur.com/2rqaeJJ.png",
+  "https://i.imgur.com/mz7fbOt.png",
+  "https://i.imgur.com/lfqiLzd.png",
+  "https://i.imgur.com/dPeBySP.png",
+  "https://i.imgur.com/uIppVKX.png",
+  "https://i.imgur.com/QNfzLrV.png",
+  "https://i.imgur.com/Fv1c2k7.png",
+  "https://i.imgur.com/t2BhDT0.png",
+  "https://i.imgur.com/WrLtn4i.png",
+  "https://i.imgur.com/If3bcqJ.png",
+  "https://i.imgur.com/zNlwOc4.png",
+  "https://i.imgur.com/yyeBACt.png",
+  "https://i.imgur.com/uMBx1wp.png",
+  "https://i.imgur.com/aHoJScO.png",
+  "https://i.imgur.com/2Hr0V17.png",
+];
+
+drawbacks.choices = drawbacks.choices.map((choice, index) => ({
+  ...choice,
+  src: images[index],
+}));
+
 export default drawbacks;

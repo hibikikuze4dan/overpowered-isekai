@@ -72,4 +72,20 @@ const world = {
   ],
 };
 
+const images = [
+  "https://i.imgur.com/1ZKW9LH.png",
+  "https://i.imgur.com/e0ulTAo.png",
+  "https://i.imgur.com/idltJjU.png",
+  "https://i.imgur.com/hZhW2YG.png",
+  "https://i.imgur.com/8vVxBJu.png",
+  "https://i.imgur.com/mwEPzRX.png",
+  "https://i.imgur.com/kPMQozt.png",
+  "https://i.imgur.com/RlFg9aL.png",
+];
+
+world.choices = world.choices.map((choice, index) => ({
+  ...choice,
+  src: images[index],
+}));
+
 export default world;

@@ -1,9 +1,16 @@
-import { Button, Grid, Typography } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  Typography,
+  CircularProgress,
+  withWidth,
+} from "@material-ui/core";
 import React, { Fragment } from "react";
 import Text from "../text";
 import CostComponent from "../cost";
 import { CardDescriptionMatcher } from "../../matchers/CardDescription";
 import { useDispatch, useSelector } from "react-redux";
+import { Img } from "react-image";
 import {
   disableStandPowersSection,
   getAllChoicesTitles,
@@ -29,6 +36,8 @@ const CardBodyComponent = ({
   limit,
   include,
   exclude,
+  width,
+  location,
 }) => {
   const incString = (
     <>
@@ -62,8 +71,28 @@ const CardBodyComponent = ({
       )}
     </span>
   );
+
+  const imageSection = (
+    <Grid item xs={12}>
+      <Grid container justify="center">
+        <Img
+          style={{
+            height: "300px",
+            width: ["xs", "sm"].includes(width) ? "100%" : "initial",
+            objectFit: "fill",
+          }}
+          src={choice.src}
+          loader={<CircularProgress />}
+          unloader={<CircularProgress />}
+        />
+      </Grid>
+    </Grid>
+  );
+
   return (
     <Grid container>
+      {(choice?.upgrades || ["world", "drawbacks"].includes(location)) &&
+        imageSection}
       <Grid item xs={12}>
         <Text variant="h4" text={choice.title} />
       </Grid>
@@ -111,7 +140,7 @@ CardBodyComponent.defaultProps = {
   disabled: false,
 };
 
-const CardComponent = ({ choice }) => {
+const CardComponent = ({ choice, width }) => {
   const dispatch = useDispatch();
   const location = useSelector(getLocation);
   const locationBasedFuntions = {
@@ -165,6 +194,7 @@ const CardComponent = ({ choice }) => {
           exclude={exclude}
           disabled={!areRequirementsMet}
           limit={limits[choice.title]}
+          location={location}
           choice={choice}
         />
       </CardWrapper>
@@ -202,6 +232,7 @@ const CardComponent = ({ choice }) => {
                     include={include}
                     exclude={exclude}
                     limit={limits[upgrade.title]}
+                    location={location}
                     disabled={
                       isUpgradeDisabled(picked, upgradePicked) ||
                       !areRequirementsMet
@@ -219,4 +250,4 @@ const CardComponent = ({ choice }) => {
   );
 };
 
-export default CardComponent;
+export default withWidth()(CardComponent);

@@ -824,4 +824,48 @@ const powers = {
   ],
 };
 
+const images = [
+  "https://i.imgur.com/XQ9nqIa.png",
+  "https://i.imgur.com/m9aRCab.png",
+  "https://i.imgur.com/HAy0UnP.png",
+  "https://i.imgur.com/DbEDWvO.png",
+  "https://i.imgur.com/tLnARlF.png",
+  "https://i.imgur.com/lPWGLkz.png",
+  "https://i.imgur.com/XwoiD0F.png",
+  "https://i.imgur.com/bqfq61O.png",
+  "https://i.imgur.com/vYEFSjv.png",
+  "https://i.imgur.com/SReNfAF.png",
+  "https://i.imgur.com/CIReaYy.png",
+  "https://i.imgur.com/yRem9b0.png",
+  "https://i.imgur.com/0A1bM2K.png",
+  "https://i.imgur.com/EOv7687.png",
+  "https://i.imgur.com/SVQ8YPA.png",
+  "https://i.imgur.com/Ob2aZYJ.png",
+  "https://i.imgur.com/IQnVFpG.png",
+  "https://i.imgur.com/JWJEeAM.png",
+  "https://i.imgur.com/76WCoSR.png",
+  "https://i.imgur.com/bKjhKXb.png",
+  "https://i.imgur.com/Ra6popF.png",
+  "https://i.imgur.com/0qLPS26.png",
+  "https://i.imgur.com/E3FLkDH.png",
+  "https://i.imgur.com/4rDjjnI.png",
+  "https://i.imgur.com/piB3QYk.png",
+  "https://i.imgur.com/9yesmtB.png",
+  "https://i.imgur.com/XjcLSE8.png",
+  "https://i.imgur.com/WBvB6wZ.png",
+  "https://i.imgur.com/EDZuZ9i.png",
+  "https://i.imgur.com/HzU4Wzn.png",
+  "https://i.imgur.com/vdEtJ8U.png",
+  "https://i.imgur.com/TSuZ8At.png",
+  "https://i.imgur.com/YLDuaiL.png",
+  "https://i.imgur.com/80qzSYV.png",
+  "https://i.imgur.com/9ZjUYAY.png",
+  "https://i.imgur.com/YKZsPtP.png",
+];
+
+powers.choices = powers.choices.map((choice, index) => ({
+  ...choice,
+  src: images[index],
+}));
+
 export default powers;

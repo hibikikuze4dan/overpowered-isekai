@@ -122,4 +122,18 @@ const startingLocation = {
   ],
 };
 
+const images = [
+  "https://i.imgur.com/TDIF7DL.png",
+  "https://i.imgur.com/L22mGPV.png",
+  "https://i.imgur.com/qt9rlmL.png",
+  "https://i.imgur.com/L7NMo2p.png",
+  "https://i.imgur.com/r03rtma.png",
+  "https://i.imgur.com/zjJl5fp.png",
+];
+
+startingLocation.choices = startingLocation.choices.map((choice, index) => ({
+  ...choice,
+  src: images[index],
+}));
+
 export default startingLocation;
