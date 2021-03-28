@@ -73,14 +73,14 @@ const world = {
 };
 
 const images = [
-  "https://i.imgur.com/1ZKW9LH.png",
+  "https://i.imgur.com/N560oYV.png",
   "https://i.imgur.com/e0ulTAo.png",
-  "https://i.imgur.com/idltJjU.png",
-  "https://i.imgur.com/hZhW2YG.png",
-  "https://i.imgur.com/8vVxBJu.png",
-  "https://i.imgur.com/mwEPzRX.png",
-  "https://i.imgur.com/kPMQozt.png",
-  "https://i.imgur.com/RlFg9aL.png",
+  "https://i.imgur.com/a8AmfMA.png",
+  "https://i.imgur.com/dY7C6uS.png",
+  "https://i.imgur.com/EYnTL9Z.png",
+  "https://i.imgur.com/tbOy996.png",
+  "https://i.imgur.com/sE6ERzZ.png",
+  "https://i.imgur.com/JgUWUMx.png",
 ];
 
 world.choices = world.choices.map((choice, index) => ({
