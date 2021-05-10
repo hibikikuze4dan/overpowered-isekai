@@ -1,4 +1,4 @@
-import { omit } from "lodash";
+import { map, mapValues, omit } from "lodash";
 import { createSelector } from "reselect";
 
 export const getStateData = (state) => state.data;
@@ -83,10 +83,29 @@ export const getAllPurchasesObject = createSelector(getStateData, (data) => {
   return omit(data, ["location, data"]);
 });
 
-const getAllPurchasesObjectExcludingSaveTitle = createSelector(
+export const getAllPurchasesObjectExcludingSaveTitle = createSelector(
   getAllPurchasesObject,
   (obj) => omit(obj, ["saveTitle"])
 );
+
+const dedupeTitles = (titlesArray) => {
+  const titlesObject = titlesArray.reduce((titles, title) => {
+    if (titles[title]) titles[title] = titles[title] + 1;
+    else titles[title] = 1;
+    return titles;
+  }, {});
+  return map(titlesObject, (times, title) => {
+    return times > 1 ? `${title} x${times}` : title;
+  }).join(", ");
+};
+
+export const getPurchasesForBreakdown = createSelector(getStateData, (data) => {
+  return mapValues(omit(data, ["location"], "data", "saveTitle"), (section) => {
+    return Array.isArray(section)
+      ? dedupeTitles(section.map((choice) => choice.title))
+      : section.title || "";
+  });
+});
 
 export const getAllCosts = createSelector(
   getAllPurchasesObjectExcludingSaveTitle,

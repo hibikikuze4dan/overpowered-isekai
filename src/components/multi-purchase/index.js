@@ -33,7 +33,6 @@ const MultiPurchaseComponent = ({ choice, disabled, limit }) => {
   const shouldDisableStandPowersSection = useSelector(
     disableStandPowersSection
   );
-  console.log(purchases);
 
   return (
     <Grid container justify="space-around" alignContent="center">

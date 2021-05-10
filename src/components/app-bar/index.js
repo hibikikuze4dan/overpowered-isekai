@@ -5,14 +5,16 @@ import {
   Typography,
   withWidth,
 } from "@material-ui/core";
-import { Save } from "@material-ui/icons";
+import { Save, List } from "@material-ui/icons";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { getAllCostsSum, getStateData } from "../../redux/selectors";
+import BreakdownModalComponent from "../breakdown";
 import SaveDialogComponent from "../save-dialog";
 
 const ApplicationBarComponent = ({ width }) => {
   const [saveDialogOpen, toggleSaveDialog] = useState(false);
+  const [isBreakdownDialogOpen, toggleBreakdownDialog] = useState(false);
   const costs = useSelector(getAllCostsSum);
   const onSaveButtonClick = () => {
     toggleSaveDialog(!saveDialogOpen);
@@ -23,6 +25,11 @@ const ApplicationBarComponent = ({ width }) => {
         <IconButton onClick={onSaveButtonClick}>
           <Save />
         </IconButton>
+        <IconButton
+          onClick={() => toggleBreakdownDialog(!isBreakdownDialogOpen)}
+        >
+          <List />
+        </IconButton>
         <Typography style={{ alignSelf: "center" }}>
           {["xs", "sm"].includes(width) ? "IP: " : "Isekai Points: "}
           {70 + costs}
@@ -31,6 +38,10 @@ const ApplicationBarComponent = ({ width }) => {
       <SaveDialogComponent
         open={saveDialogOpen}
         onClose={() => toggleSaveDialog(!saveDialogOpen)}
+      />
+      <BreakdownModalComponent
+        open={isBreakdownDialogOpen}
+        onClose={() => toggleBreakdownDialog(!isBreakdownDialogOpen)}
       />
     </AppBar>
   );
