@@ -7,7 +7,7 @@ import BreakdownTitle from "./BreakdownTitle";
 const BreakdownModalComponent = ({ open, onClose }) => {
   return (
     <Dialog open={open} onClose={onClose}>
-      <Grid container>
+      <Grid container spacing={4} style={{ padding: "16px 24px" }}>
         <Grid item xs={12}>
           <BreakdownTitle />
         </Grid>
